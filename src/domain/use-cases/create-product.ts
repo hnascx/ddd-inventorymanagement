@@ -1,3 +1,4 @@
+import { UniqueEntityID } from "../../core/entities/unique-entity-id"
 import { Product } from "../entities/product"
 import { ProductRepository } from "../repositories/product-repository"
 
@@ -15,14 +16,14 @@ export class CreateProductUseCase {
   constructor(private productRepository: ProductRepository) {}
 
   async execute({ userId }: CreateProductUseCaseRequest) {
-    const product = new Product({
+    const product = Product.create({
       name: "Product",
       stock: 0,
       purchasePrice: 0,
       salePrice: 0,
       size: "size",
       color: "color",
-      authorId: userId
+      authorId: new UniqueEntityID(userId)
     })
 
     await this.productRepository.create(product)

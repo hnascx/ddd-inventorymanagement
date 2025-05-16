@@ -1,13 +1,22 @@
 import { Entity } from "../../core/entities/entity"
+import { UniqueEntityID } from "../../core/entities/unique-entity-id"
+import { Optional } from "../../core/types/optional"
 
 interface UserProps {
   name: string
-  createdAt: Date
-  updatedAt?: Date
 }
 
 export class User extends Entity<UserProps> {
   get name() {
     return this.props.name
   }
+
+  static create(
+    props: UserProps,
+    id?: UniqueEntityID
+  ) {
+    const user = new User(props, id)
+  
+    return user
+  } 
 }

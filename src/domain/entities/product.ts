@@ -1,5 +1,6 @@
 import { Entity } from "../../core/entities/entity"
 import { UniqueEntityID } from "../../core/entities/unique-entity-id"
+import { Optional } from "../../core/types/optional"
 import { Slug } from "./value-objects/slug"
 
 interface ProductProps {
@@ -10,7 +11,7 @@ interface ProductProps {
   salePrice: number
   size: string
   color: string
-  slug: Slug
+  // slug: Slug
   createdAt: Date
   updatedAt?: Date
 }
@@ -19,4 +20,19 @@ export class Product extends Entity<ProductProps> {
   get name() {
     return this.props.name
   }
+
+  static create(
+    props: Optional<ProductProps, 'createdAt'>,
+    id?: UniqueEntityID
+  ) {
+    const product = new Product(
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+      },
+      id,
+    )
+  
+    return product
+  } 
 } 
