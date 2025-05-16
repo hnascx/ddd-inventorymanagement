@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto"
+import { Slug } from "./value-objects/slug"
 
 interface ProductProps {
   name: string
@@ -7,6 +8,7 @@ interface ProductProps {
   salePrice: number
   size: string
   color: string
+  slug: Slug
   authorId: string
 }
 
@@ -18,6 +20,7 @@ export class Product {
   public salePrice: number
   public size: string
   public color: string
+  public slug: Slug
   public authorId: string
 
   constructor(props: ProductProps, id?: string) {
@@ -27,6 +30,7 @@ export class Product {
     this.salePrice = props.salePrice
     this.size = props.size
     this.color = props.color
+    this.slug = props.slug
     this.authorId = props.authorId
     this.id = id ?? randomUUID()
   }
