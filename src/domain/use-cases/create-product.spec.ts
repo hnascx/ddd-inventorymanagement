@@ -1,12 +1,19 @@
 import { expect, test } from 'vitest'
 import { CreateProductUseCase } from './create-product'
+import { Product } from '../entities/product'
+import { ProductRepository } from '../repositories/product-repository'
 
-test('create an product', () => {
-  const createProduct = new CreateProductUseCase()
+const fakeProductRepository: ProductRepository = {
+  create: async (product: Product) => {
+    return
+  }
+}
 
-  const product = createProduct.execute({
+test('create an product', async () => {
+  const createProduct = new CreateProductUseCase(fakeProductRepository)
+
+  const product = await createProduct.execute({
     userId: "1",
-    productId: "1",
     name: "Product",
     stock: 0,
     purchasePrice: 0,

@@ -1,4 +1,5 @@
 import { Product } from "../entities/product"
+import { ProductRepository } from "../repositories/product-repository"
 
 interface CreateProductUseCaseRequest {
   userId: string
@@ -11,7 +12,9 @@ interface CreateProductUseCaseRequest {
 }
 
 export class CreateProductUseCase {
-  execute({ userId }: CreateProductUseCaseRequest) {
+  constructor(private productRepository: ProductRepository) {}
+
+  async execute({ userId }: CreateProductUseCaseRequest) {
     const product = new Product({
       name: "Product",
       stock: 0,
@@ -21,6 +24,8 @@ export class CreateProductUseCase {
       color: "color",
       authorId: userId
     })
+
+    await this.productRepository.create(product)
 
     return product
   }
