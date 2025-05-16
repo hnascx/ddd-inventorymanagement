@@ -2,7 +2,6 @@ import { Product } from "../entities/product"
 
 interface CreateProductUseCaseRequest {
   userId: string
-  productId: string
   name: string
   stock: number
   purchasePrice: number
@@ -12,8 +11,16 @@ interface CreateProductUseCaseRequest {
 }
 
 export class CreateProductUseCase {
-  execute({ userId, productId }: CreateProductUseCaseRequest) {
-    const product = new Product("Product", 0, 0, 0, "size", "color")
+  execute({ userId }: CreateProductUseCaseRequest) {
+    const product = new Product({
+      name: "Product",
+      stock: 0,
+      purchasePrice: 0,
+      salePrice: 0,
+      size: "size",
+      color: "color",
+      authorId: userId
+    })
 
     return product
   }
