@@ -1,0 +1,1 @@
+test('fetch product by properties', async () => {})

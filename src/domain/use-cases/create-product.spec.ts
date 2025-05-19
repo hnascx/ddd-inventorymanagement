@@ -8,7 +8,7 @@ const fakeProductRepository: ProductRepository = {
   }
 }
 
-test('create an product', async () => {
+test('create a product', async () => {
   const createProduct = new CreateProductUseCase(fakeProductRepository)
 
   const product = await createProduct.execute({
